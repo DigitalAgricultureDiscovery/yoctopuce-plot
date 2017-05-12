@@ -1,0 +1,21 @@
+{% extends "header.html" %}
+
+{% block body %}
+
+<h3>
+    Username: {{ session.username }} 
+</h3>
+
+<h3>
+    Registered Devices:
+</h3>
+
+<h5>
+    <ul>
+        {% for item in device_names %}
+            <li>{{ item }}</li>
+        {% endfor %}
+    </ul>    
+</h5>
+
+{% endblock %}

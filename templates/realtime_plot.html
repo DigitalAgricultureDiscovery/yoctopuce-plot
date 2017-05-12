@@ -1,0 +1,44 @@
+{% extends "header.html" %}
+
+{% block body %}
+
+  {{ js_resources|indent(4)|safe }}
+
+  {{ css_resources|indent(4)|safe }}
+
+  <div id="myPlot">  
+
+    <p>Starting Time: {{ start_time|indent(4)|safe }}</p>
+
+    <div id="myDiv">
+      {{ plot_div|indent(4)|safe }}
+    </div>
+
+    <div id="myScript">
+      {{ plot_script|indent(4)|safe }}
+    </div>
+
+  </div>
+
+<script>
+    setInterval(function() {
+        console.log("Hello")
+        $.ajax({
+            url: "/realtime_plot_update/",
+            type: "POST",
+            dataType: "text",
+            success: function (data) {
+              
+              data = $.parseJSON(data);
+              console.log(data[1]);
+              var div = data["plot_div"]
+              var script = data["plot_script"]
+              $("#myDiv").html(div);
+              $("#myScript").html(script);
+            },
+        });
+    }, 5*1000); // Repeat interval is in milliseconds
+  </script>
+
+
+{% endblock %}

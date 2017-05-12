@@ -1,0 +1,29 @@
+{% extends "header.html" %}
+
+{% block body %}
+
+  <div id="myPlot">
+  
+    <p> Select your settings: </p>
+    <form name="color_button" method="post">
+        Sensor Type:
+        <select name="parameter">
+        {% for item in keys %}
+            <option {{ "selected" if item|indent(4)|safe == parameter }} value="{{ item }}">{{ item }}</option>
+        {% endfor %}
+        </select>
+        <br><br>
+        Color:
+        <select name="color">
+        <option {{ "selected" if color|indent(4)|safe == "Red" }} value="Red">Red</option>
+        <option {{ "selected" if color|indent(4)|safe == "Green" }} value="Green">Green</option>
+        <option {{ "selected" if color|indent(4)|safe == "Blue" }} value="Blue">Blue</option>
+        <option {{ "selected" if color|indent(4)|safe == "Black" }} value="Black">Black</option>
+        </select>
+        &nbsp &nbsp &nbsp
+        <input class="btn btn-default" type="submit" value="Submit">
+        <br><br>
+
+  </div>
+
+{% endblock %}

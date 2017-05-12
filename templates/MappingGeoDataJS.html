@@ -1,0 +1,62 @@
+{% extends "header.html" %}
+
+{% block body %}
+
+    <link 
+        rel="stylesheet" 
+        href="http://cdn.leafletjs.com/leaflet-0.7/leaflet.css"
+    />
+	 <link href="{{ url_for('static', filename='css/Control.OSMGeocoder.css') }}" rel="stylesheet"/>
+
+
+    <div id="map" style="width: 800px; height: 600px"></div>
+
+    <script
+        src="http://cdn.leafletjs.com/leaflet-0.7/leaflet.js">
+    </script>
+
+	<script src="{{ url_for('static', filename='js/Control.OSMGeocoder.js') }}"></script>
+
+
+    <script>
+        var planes = {{ planes | safe }};
+        
+        var marker = new L.LayerGroup();
+
+        for (var i = 0; i < planes.length; i++) {
+          L.marker([planes[i][1],planes[i][2]])
+            .bindPopup(planes[i][0])
+            .addTo(marker);
+        }
+
+        // OpenStreetMap layer
+        var osm = L.tileLayer("http://{s}.tile.osm.org/{z}/{x}/{y}.png", {
+            attribution: '&copy; <a href="http://osm.org/copyright">OpenStreetMap</a> contributors'});
+
+        // Esri WorldImagery layer
+        var esri = L.tileLayer("http://server.arcgisonline.com/ArcGIS/rest/services/World_Imagery/MapServer/tile/{z}/{y}/{x}", {
+            attribution: "Tiles &copy; Esri &mdash; Source: Esri, i-cubed, USDA, " +
+                        "USGS, AEX, GeoEye, Getmapping, Aerogrid, IGN, IGP, UPR-EGP, " +
+                        "and the GIS User Community"
+        });
+
+        var map = L.map('map', {
+            center: [40.4259, -86.9081],
+            zoom: 14,
+            layers: [esri, marker]
+        });
+
+        var baseLayers = {
+            "Streets": osm,
+            "Satelite": esri
+        };
+
+        var overlays = {
+            "Markers": marker
+        };
+
+        L.control.layers(baseLayers, overlays).addTo(map);
+
+    </script>
+
+{% endblock %}

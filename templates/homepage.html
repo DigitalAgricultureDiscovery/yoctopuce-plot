@@ -1,0 +1,16 @@
+{% extends "header.html" %}
+
+{% block body %}
+
+<h4>
+<div class="list-group">
+
+    {% for t in TOPIC_DICT["Homepage"] %}
+        <a class="list-group-item list-group-item-action" href="{{ t[1] }}" style="color: #B1810B; border-color: #fff; width:40%">{{ t[0] }}</a>
+
+    {% endfor %}
+</div>
+</h4>
+
+{% endblock %}
+

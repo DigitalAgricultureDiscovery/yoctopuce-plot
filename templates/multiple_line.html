@@ -1,0 +1,24 @@
+{% extends "header.html" %}
+
+{% block body %}
+
+  {{ js_resources|indent(4)|safe }}
+
+  {{ css_resources|indent(4)|safe }}
+
+  {{ plot_script|indent(4)|safe }}
+
+  <p> Select your settings: </p>
+
+  <form name="color_button" method='POST'>
+    Sensor Type:<br>
+        {% for item in keys %}
+            <input type="checkbox" name="sensor_type" value="{{ item }}"> "{{ item }}"<br>
+        {% endfor %}
+    
+    <input class="btn btn-default" type="submit" value="Submit">
+    <br><br>
+  </form>
+  {{ plot_div|indent(4)|safe }}
+
+{% endblock %}

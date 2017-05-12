@@ -1,0 +1,65 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+	<meta charset="utf-8">
+	<title>Plot App</title>
+	<meta name="viewport" content="width=device-width, initial-scale=1">
+	<link href="{{ url_for('static', filename='css/bootstrap.min.css') }}" rel="stylesheet">
+	<link href="{{ url_for('static', filename='css/404.css') }}" rel="stylesheet">
+	<link rel="shortcut icon" href="{{ url_for('static', filename='images/favicon.ico') }}">
+	<link href="http://cdn.pydata.org/bokeh/release/bokeh-0.12.5.min.css" rel="stylesheet" type="text/css">
+  <script src="http://cdn.pydata.org/bokeh/release/bokeh-0.12.5.min.js"></script>
+</head>
+
+<header>
+	<div class="navbar-header">
+      <a class="navbar-brand" href="/">
+	  <img style="max-width:120px; margin-top: -7px;" src="{{ url_for('static', filename='images/purdue-logo.png') }}">
+	  </a>
+    </div>
+
+	<div class = "container-fluid">
+
+	  <ul class="nav navbar-nav navbar-right">
+		<div style="margin-right: 10px; margin-left: 15px; margin-top: 5px; margin-bottom: 5px;"  class="container-fluid">
+			<h5>
+				{% if session.logged_in %}
+				<a href="/user_info/" style="color: #B1810B; border-color: #fff;"> <span class="glyphicon glyphicon-user" style="color: #B1810B; border-color: #fff;"></span> {{ session.username }} </a>&nbsp
+				<a href="/logout/" style="color: #B1810B; border-color: #fff;"><span class="glyphicon glyphicon-log-out" style="color: #B1810B; border-color: #fff;"></span> logout </a>&nbsp 
+				{% else %}
+				<!--<a href="/support-donate/" style="color: #B1810B; border-color: #fff;"> <span class="glyphicon glyphicon-heart" style="color: #B1810B; border-color: #fff;"></span> Support </a>&nbsp -->
+				<a href="/login/" style="color: #B1810B; border-color: #fff;"><span class="glyphicon glyphicon-log-in" style="color: #B1810B; border-color: #fff;"></span> Login </a>&nbsp 
+				<a href="/register/" style="color: #B1810B; border-color: #fff;"><span class="glyphicon glyphicon-pencil" style="color: #B1810B; border-color: #fff;"></span> Sign up</a>
+				{% endif %}
+			</h5>
+		</div>
+      </ul>
+	</div>
+
+</header>
+
+<br>
+
+<body>
+
+	<div class="container" style="min-height:100% width:80%">
+	{% with messages = get_flashed_messages() %}
+	  {% if messages %}
+	    {% for message in messages %}
+		  <div class="alert alert-warning alert-dismissible" role="alert">
+		  <button type="button" class="close" data-dismiss="alert" aria-label="Close"><span aria-hidden="true">×</span></button>
+			{{message}}
+		  </div>
+		{% endfor %}
+	  {% endif %}
+	{% endwith %}
+	
+	{% block body %}{% endblock %}
+	</div>
+	<script src="{{ url_for('static', filename='js/jquery-2.1.1.min.js') }}"></script>
+	<script type="text/javascript" src="{{ url_for('static', filename='js/bootstrap.min.js') }}"></script>
+	<script type="text/javascript" src="{{ url_for('static', filename='js/moment.js') }}"></script>
+
+</body>
+
+</html>
