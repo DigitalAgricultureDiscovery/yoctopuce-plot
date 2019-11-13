@@ -17,7 +17,7 @@ pandas==0.18.1
 passlib==1.7.1
 python-dateutil==2.6.0
 pytz==2016.10
-PyYAML==3.12
+PyYAML==5.1
 requests==2.13.0
 singledispatch==3.4.0.3
 six==1.10.0
