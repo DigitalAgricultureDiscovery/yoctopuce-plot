@@ -3,7 +3,7 @@ bokeh==0.12.4
 certifi==2017.1.23
 chardet==2.3.0
 click==6.7
-Flask==0.12
+Flask==1.0
 Flask-WTF==0.14.2
 futures==3.0.5
 html5lib==0.999
