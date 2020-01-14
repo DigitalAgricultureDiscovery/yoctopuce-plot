@@ -38,7 +38,7 @@ app.secret_key = 'super secret key'
 
 
 # Load database
-db = TinyDB('/var/www/html/flaskapp/db.json')
+db = TinyDB('./db.json')
 Query = Query()
 
 # Initial Setup
